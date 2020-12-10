@@ -11,6 +11,7 @@ In the realistic environment, the labels of big data are often manually marked b
 
 <img src="http://chart.googleapis.com/chart?cht=tx&chl= \hat{T}_{i j}=\hat{p}\left(\tilde{\boldsymbol{y}}=\boldsymbol{e}^{j} \mid \overline{\boldsymbol{x}}^{i}\right)" style="border:none;">
 
+<img src="https://latex.codecogs.com/png.latex? \hat{T}_{i j}=\hat{p}\left(\tilde{\boldsymbol{y}}=\boldsymbol{e}^{j} \mid \overline{\boldsymbol{x}}^{i}\right)">
 
 
 This project reproduce methods include: Trunc_loss[1], PENCIL[2], MLNT[3], Co-teaching[4], Co-teaching_plus[5]
