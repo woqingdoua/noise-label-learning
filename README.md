@@ -1,5 +1,5 @@
 # Noise Label learning
-=====
+
 In the realistic environment, the labels of big data are often manually marked by experts or obtained automatically 
 (For example, in the Clothing1M dataset, the clothing types are obtained by analyzing pictures' surrounding text). 
 However, neither of these two methods can avoid generating wrong marks in label classification. Also, traditional 
