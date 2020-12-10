@@ -11,9 +11,14 @@ In the realistic environment, the labels of big data are often manually marked b
 
 <img src="http://chart.googleapis.com/chart?cht=tx&chl= \hat{T}_{i j}=\hat{p}\left(\tilde{\boldsymbol{y}}=\boldsymbol{e}^{j} \mid \overline{\boldsymbol{x}}^{i}\right)" style="border:none;">
 
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
-$$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$
-\\(x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}\\)
+\begin{aligned}
+U_b &= (p - \alpha) P \times 10^{-1} / d^3 \\ &= \left\{
+  \begin{array}{ll}
+  (p - \alpha) \left(\dfrac{1}{p \ln 2} - \sigma \right), & P < P_{max} \\
+  (p - \alpha) \dfrac{P_{max}}{10 \cdot d^3}, & P = P_{max}
+  \end{array}
+  \right.
+\end{aligned}
 
 This project reproduce methods include: Trunc_loss[1], PENCIL[2], MLNT[3], Co-teaching[4], Co-teaching_plus[5]
 
