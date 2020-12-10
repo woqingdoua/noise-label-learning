@@ -13,6 +13,9 @@ may be noise.
 ## Method
 This project reproduce methods include: Trunc_loss[1], PENCIL[2], MLNT[3], Co-teaching[4], Co-teaching_plus[5]
 
+<img src="http://chart.googleapis.com/chart?cht=tx&chl=\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" style="border:none;">
+
+
 ## References
 [1] Zhang Z, Sabuncu M. Generalized cross entropy loss for training deep neural networks with noisy labels[J]. Advances in neural information processing systems, 2018, 31: 8778-8788.
 
