@@ -13,7 +13,7 @@ In the realistic environment, the labels of big data are often manually marked b
 
 <img src="http://chart.googleapis.com/chart?cht=tx&chl= \hat{T}_{i j}=\hat{p}\left(\tilde{\boldsymbol{y}}=\boldsymbol{e}^{j} \mid \overline{\boldsymbol{x}}^{i}\right)" style="border:none;">
 
-接下来，我们介绍最近常用于解决Noise Label Learning的方法。改写损失函数法包括：Trunc Loss[3], Yi et al.[4], PENCIL[5], DAC[6], Bi-Tempered[7], SL[8]. Trunc Loss was proposed based on the principle: Cross Entropy Loss收敛速度快，拟合能力强，但noise-robust差；MAE收敛速度慢，拟合label能力差，但noise-robust好。于是作者提出两者的结合：
+接下来，我们介绍最近常用于解决Noise Label Learning的方法。改写损失函数法包括：Trunc Loss[3], Yi et al.[4], PENCIL[5], DAC[6], SL[7]. Trunc Loss was proposed based on the principle: Cross Entropy Loss收敛速度快，拟合能力强，但noise-robust差；MAE收敛速度慢，拟合label能力差，但noise-robust好。于是作者提出两者的结合：
 
 <img src="http://chart.googleapis.com/chart?cht=tx&chl= \mathcal{L}_{q}\left(f(\boldsymbol{x}), \boldsymbol{e}_{j}\right)=\frac{\left(1-f_{j}(\boldsymbol{x})^{q}\right)}{q}" style="border:none;">, q->0是CCE，q=1是MAE。 
 
@@ -28,9 +28,9 @@ DAC[6] 引入 abstention rates概念，根据abstention rates分配样本权重�
 
 <img src="http://chart.googleapis.com/chart?cht=tx&chl=\mathcal{L}\left(x_{j}\right)=\left(1-p_{k+1}\right)\left(-\sum_{i=1}^{k} t_{i} \log \frac{p_{i}}{1-p_{k+1}}\right)+\alpha \log \frac{1}{1-p_{k+1}}" style="border:none;">， pk+1为abstention rate。
 
+Symmetric Cross Entropy Learning (SL) 是一个很好理解的方法，文章提出 reverse cross entropy 和  reverse KL-divergence，证明其更具有鲁棒性。cross entropy和KL-divergence不是对称的函数，即求 p 对 q 的散度和 q 对 p 的散度并不相等。传统分类任务中，我们求 KL(q||p)作为损失函数, q为ground truth class distribution, p is the predicted distribution over labels. reverse KL-divergence 中求KL(p||q)作为损失函数. reverse cross entropy同理。
 
-
-This project reproduce methods include: Trunc loss[1], PENCIL[2], MLNT[3], Co-teaching[4], Co-teaching_plus[5]
+This project reproduce methods include: Trunc loss[1], PENCIL[2], MLNT[8], Co-teaching[9], Co-teaching_plus[10]
 
 
 
@@ -48,17 +48,12 @@ This project reproduce methods include: Trunc loss[1], PENCIL[2], MLNT[3], Co-te
 
 [6] Thulasidasan S, Bhattacharya T, Bilmes J, et al. Combating label noise in deep learning using abstention[J]. arXiv preprint arXiv:1905.10964, 2019.
 
-[7] Amid E, Warmuth M K K, Anil R, et al. Robust bi-tempered logistic loss based on bregman divergences[C]//Advances in Neural Information Processing Systems. 2019: 15013-15022.
+[7] Wang Y, Ma X, Chen Z, et al. Symmetric cross entropy for robust learning with noisy labels[C]//Proceedings of the IEEE International Conference on Computer Vision. 2019: 322-330.
 
-[8] Wang Y, Ma X, Chen Z, et al. Symmetric cross entropy for robust learning with noisy labels[C]//Proceedings of the IEEE International Conference on Computer Vision. 2019: 322-330.
+[8] Li J, Wong Y, Zhao Q, et al. Learning to learn from noisy labeled data[C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2019: 5051-5059.
 
+[9] Han B, Yao Q, Yu X, et al. Co-teaching: Robust training of deep neural networks with extremely noisy labels[C]//Advances in neural information processing systems. 2018: 8527-8537.
 
-
-
-[3] Li J, Wong Y, Zhao Q, et al. Learning to learn from noisy labeled data[C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2019: 5051-5059.
-
-[4] Han B, Yao Q, Yu X, et al. Co-teaching: Robust training of deep neural networks with extremely noisy labels[C]//Advances in neural information processing systems. 2018: 8527-8537.
-
-[5] Yu X, Han B, Yao J, et al. How does disagreement help generalization against label corruption?[J]. arXiv preprint arXiv:1901.04215, 2019.
+[10] Yu X, Han B, Yao J, et al. How does disagreement help generalization against label corruption?[J]. arXiv preprint arXiv:1901.04215, 2019.
 
 
