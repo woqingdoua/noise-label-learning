@@ -15,14 +15,18 @@ In the realistic environment, the labels of big data are often manually marked b
 
 接下来，我们介绍最近常用于解决Noise Label Learning的方法。改写损失函数法包括：Trunc Loss[3], Yi et al.[4], PENCIL[5], DAC[6], Bi-Tempered[7], SL[8]. Trunc Loss was proposed based on the principle: Cross Entropy Loss收敛速度快，拟合能力强，但noise-robust差；MAE收敛速度慢，拟合label能力差，但noise-robust好。于是作者提出两者的结合：
 
-<img src="http://chart.googleapis.com/chart?cht=tx&chl= \mathcal{L}_{q}\left(f(\boldsymbol{x}), \boldsymbol{e}_{j}\right)=\frac{\left(1-f_{j}(\boldsymbol{x})^{q}\right)}{q}" style="border:none;">
-q->0是CCE，q=1是MAE。 
+<img src="http://chart.googleapis.com/chart?cht=tx&chl= \mathcal{L}_{q}\left(f(\boldsymbol{x}), \boldsymbol{e}_{j}\right)=\frac{\left(1-f_{j}(\boldsymbol{x})^{q}\right)}{q}" style="border:none;">, q->0是CCE，q=1是MAE。 
 
 作者提出，样本损失在一定区间内则使用上式优化，超过此区间则设损失为常数，不优化，总的目标函数如下表达：
 
 <img src="http://chart.googleapis.com/chart?cht=tx&chl= \underset{\boldsymbol{\theta}, \boldsymbol{w} \in[0,1]^{n}}{\operatorname{argmin}} \sum_{i=1}^{n} w_{i} \mathcal{L}_{q}\left(f\left(\boldsymbol{x}_{i} ; \boldsymbol{\theta}\right), y_{i}\right)-\mathcal{L}_{q}(k) \sum_{i=1}^{n} w_{i}" style="border:none;">
 
 
+PENCIL[5] 是 Yi et al.[4]的改进。两个方法都使用了KL-divergence loss 和 Entropy loss。前者为分类损失，后者为正则化项，目的在于可以 force the network to peak at only one category rather than being flat because the one-hot distribution has the smallest possible entropy value。不同之处在于一个先验概率分布的引入。Yi et al的方法中，引入一个固定的先验概率分布，which is a distribution of classes among all training data. 目地有两个：1.If the prior distribution of classes is known, then the updated labels should follow the same； 2. prevent the assignment of all labels to a single class；。但在PENCIL中，这个先验概率视为参数，可以被更新。这个先验概率于预测值的KL-divergence作为这两种方法损失中但正则化项。
+
+DAC[6] 引入 abstention rates概念，根据abstention rates分配样本权重。样本输出维度为类别数目+1，最后一维度作为abstention rates。为避免模型倾向于遗弃样本，作者提出正则化项，当遗弃样本式此项会增加总体损失。因此，总的损失函数为：
+
+<img src="http://chart.googleapis.com/chart?cht=tx&chl=\mathcal{L}\left(x_{j}\right)=\left(1-p_{k+1}\right)\left(-\sum_{i=1}^{k} t_{i} \log \frac{p_{i}}{1-p_{k+1}}\right)+\alpha \log \frac{1}{1-p_{k+1}}" style="border:none;">， pk+1为abstention rate。
 
 
 
