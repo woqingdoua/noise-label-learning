@@ -27,15 +27,17 @@ PENCIL[5] is a improvement of Yi et al.[4]. Both methods used KL-divergence and 
 The difference between above two method lies in the manner of introducing a prior probability. 
 This prior probability represents a rough probability estimation of label distribution. 
 Yi et al introduced a fixed prior probability.
-The function includes：1.If the prior distribution of classes is known, then the updated labels should follow the same； 2. prevent the assignment of all labels to a single class. By comparison，this prior probability was regarded as learnable parameters in PENCIL.  Both these two methods ultilized  KL-divergence between this prior probability and the predicted value as the regularization term in the loss.
+The function includes：1.If the prior distribution of classes is known, then the updated labels should follow the same； 2. prevent the assignment of all labels to a single class. By comparison，this prior probability was regarded as learnable parameters in PENCIL. Both these two methods ultilized  KL-divergence between this prior probability and the predicted value as the regularization term in the loss.
 
-DAC[6] 引入 abstention rates概念，根据abstention rates分配样本权重。样本输出维度为类别数目+1，最后一维度作为abstention rates。为避免模型倾向于遗弃样本，作者提出正则化项，当遗弃样本式此项会增加总体损失。因此，总的损失函数为：
+DAC[6]  introduced abstention rates，The weight to each sample was re-allocated according to the abstention rates.
+The number of dimensions the network output is the class' number +1.
+The final dimension is abstention rates. To prevent the model from abandoning all samples, the author proposed a regularization term, which increased the overall loss when the samples were discarded. Therefore, the total loss function is:
 
 $$\mathcal{L}\left(x_{j}\right)=\left(1-p_{k+1}\right)\left(-\sum_{i=1}^{k} t_{i} \log \frac{p_{i}}{1-p_{k+1}}\right)+\alpha \log \frac{1}{1-p_{k+1}}$$, pk+1为abstention rate。
 
-Symmetric Cross Entropy Learning (SL) 是一个很好理解的方法，文章提出 reverse cross entropy 和  reverse KL-divergence，证明其更具有鲁棒性。cross entropy和KL-divergence不是对称的函数，即求 p 对 q 的散度和 q 对 p 的散度并不相等。传统分类任务中，我们求 KL(q||p)作为损失函数, q为ground truth class distribution, p is the predicted distribution over labels. reverse KL-divergence 中求KL(p||q)作为损失函数. reverse cross entropy同理。
+Symmetric Cross Entropy Learning (SL) is a well-understood method. The article proposes reverse cross entropy and reverse KL-divergence. Cross entropy and KL-divergence are asymmetric functions. In a other word, the KL-divergence of p to q and the KL-divergence of q to p are not equal. In traditional classification tasks, we find KL(q||p) as the loss function, q is the ground truth class distribution, p is the predicted distribution over labels. In reverse KL-divergence, we find KL(p||q) as the loss function. The same is true for reverse cross entropy.
 
-This project reproduce methods include: Trunc loss[1], PENCIL[2], MLNT[8], Co-teaching[9], Co-teaching_plus[10]
+This project reproduces methods include: Trunc loss[1], PENCIL[2], MLNT[8], Co-teaching[9], Co-teaching_plus[10]
 
 
 
