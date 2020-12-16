@@ -7,9 +7,7 @@ Here, we divide the existing methods into three categories: 1) rewriteing the lo
 
 First of all, we introduced two classic models, Sainbayar et al.[1] and Forward[2]. The two methods are similar, both adding a num_class*num_class matrix after the basic model, called the Noise transition matrix, and removing the matrix during the test phase. The difference lies in the update strategy of the Noise transition matrix parameters. The former used the weight decay of the Noise transition matrix as a regularization term to back-propagate and update parameters. The latter selected the perfect example from each category of the predicted results. The perfect example has the greatest possibility comparing to those samples which are predicted to be the same class.
 
-<img src="http://chart.googleapis.com/chart?cht=tx&chl=\overline{\boldsymbol{x}}^{i}=\operatorname{argmax}_{\boldsymbol{x} \in X^{\prime}} \hat{p}\left(\tilde{\boldsymbol{y}}=\boldsymbol{e}^{i} \mid \boldsymbol{x}\right)" style="border:none;">
-
-$$H(x,y) = \sum_{i=0}^{M_{i} - 1} \sum_{j=0}^{M_{j}-1} I(x+i - a_{i}, y + j - a_{j})K(i,j)$$
+$$\overline{\boldsymbol{x}}^{i}=\operatorname{argmax}_{\boldsymbol{x} \in X^{\prime}} \hat{p}\left(\tilde{\boldsymbol{y}}=\boldsymbol{e}^{i} \mid \boldsymbol{x}\right)$$
 
 At this time, the probability distribution obtained by this perfect example was used as an unbiased estimate of its noise matrix class.
 
