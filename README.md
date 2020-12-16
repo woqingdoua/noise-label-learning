@@ -19,9 +19,7 @@ Trunc Loss was proposed based on the principle: Cross-Entropy Loss has quick con
 
 $$\mathcal{L}_{q}\left(f(\boldsymbol{x}), \boldsymbol{e}_{j}\right)=\frac{(1-f_{j}(\boldsymbol{x})^{q})}{q}$$,
 
-when q->0 is CCE，q=1 is MAE.
-
-The author proposed that if the sample loss is within a certain interval, the above formula was used to update parameters, and if the loss exceeded this interval, the loss was set as a constant without optimization. The total objective function was expressed as follows:
+when q->0 is CCE，q=1 is MAE. The author proposed that if the sample loss is within a certain interval, the above formula was used to update parameters, and if the loss exceeded this interval, the loss was set as a constant without optimization. The total objective function was expressed as follows:
 
 $$\underset{\boldsymbol{\theta}, \boldsymbol{w} \in[0,1]^{n}}{\operatorname{argmin}} \sum_{i=1}^{n} w_{i} \mathcal{L}_{q}\left(f\left(\boldsymbol{x}_{i};\boldsymbol{\theta}\right), y_{i}\right)-\mathcal{L}_{q}(k) \sum_{i=1}^{n} w_{i}$$
 
