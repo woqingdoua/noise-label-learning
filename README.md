@@ -23,6 +23,8 @@ The author proposed that if the sample loss is within a certain interval, the ab
 
 $$\underset{\boldsymbol{\theta}, \boldsymbol{w} \in[0,1]^{n}}{\operatorname{argmin}} \sum_{i=1}^{n} w_{i} \mathcal{L}_{q}\left(f\left(\boldsymbol{x}_{i}; \boldsymbol{\theta}\right), y_{i}\right)-\mathcal{L}_{q}(k) \sum_{i=1}^{n} w_{i}$$
 
+$$\mathcal{L}(x_{j})=(1-p_{k+1})(-\sum_{i=1}^{k} t_{i} \log \frac{p_{i}}{1-p_{k+1}})+\alpha \log \frac{1}{1-p_{k+1}}$$
+
 PENCIL[5] is a improvement of Yi et al.[4]. Both methods used KL-divergence and Cross-Entropy loss as the the term of loss function. The former term is classification loss and the latter is regularization, which aims to force the network to peak at only one category rather than being flat because the one-hot distribution has the smallest possible entropy value. 
 The difference between above two method lies in the manner of introducing a prior probability. 
 This prior probability represents a rough probability estimation of label distribution. 
@@ -33,7 +35,7 @@ DAC[6]  introduced abstention rates，The weight to each sample was re-allocated
 The number of dimensions the network output is the class' number +1.
 The final dimension is abstention rates. To prevent the model from abandoning all samples, the author proposed a regularization term, which increased the overall loss when the samples were discarded. Therefore, the total loss function is:
 
-$$\mathcal{L}\left(x_{j}\right)=\left(1-p_{k+1}\right)\left(-\sum_{i=1}^{k} t_{i} \log \frac{p_{i}}{1-p_{k+1}}\right)+\alpha \log \frac{1}{1-p_{k+1}}$$, pk+1为abstention rate。
+$$\mathcal{L}\left(x_{j}\right)=\left(1-p_{k+1}\right)\left(-\sum_{i=1}^{k} t_{i} \log \frac{p_{i}}{1-p_{k+1}}\right)+\alpha \log \frac{1}{1-p_{k+1}}$$, pk+1 is abstention rate。
 
 Symmetric Cross Entropy Learning (SL) is a well-understood method. The article proposes reverse cross entropy and reverse KL-divergence. Cross entropy and KL-divergence are asymmetric functions. In a other word, the KL-divergence of p to q and the KL-divergence of q to p are not equal. In traditional classification tasks, we find KL(q||p) as the loss function, q is the ground truth class distribution, p is the predicted distribution over labels. In reverse KL-divergence, we find KL(p||q) as the loss function. The same is true for reverse cross entropy.
 
