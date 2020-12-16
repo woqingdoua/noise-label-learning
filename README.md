@@ -21,9 +21,7 @@ $$\mathcal{L}_{q}\left(f(\boldsymbol{x}), \boldsymbol{e}_{j}\right)=\frac{\left(
 
 The author proposed that if the sample loss is within a certain interval, the above formula was used to update parameters, and if the loss exceeded this interval, the loss was set as a constant without optimization. The total objective function was expressed as follows:
 
-$$\underset{\boldsymbol{\theta}, \boldsymbol{w} \in[0,1]^{n}}{\operatorname{argmin}} \sum_{i=1}^{n} w_{i} \mathcal{L}_{q}\left(f\left(\boldsymbol{x}_{i}; \boldsymbol{\theta}\right), y_{i}\right)-\mathcal{L}_{q}(k) \sum_{i=1}^{n} w_{i}$$
-
-$$\mathcal{L}(x_{j})=(1-p_{k+1})(-\sum_{i=1}^{k} t_{i} \log \frac{p_{i}}{1-p_{k+1}})+\alpha \log \frac{1}{1-p_{k+1}}$$
+$$\underset{\boldsymbol{\theta}, \boldsymbol{w} \in[0,1]^{n}}{\operatorname{argmin}} \sum_{i=1}^{n} w_{i} \mathcal{L}_{q}\left(f\left(\boldsymbol{x}_{i};\boldsymbol{\theta}\right), y_{i}\right)-\mathcal{L}_{q}(k) \sum_{i=1}^{n} w_{i}$$
 
 PENCIL[5] is a improvement of Yi et al.[4]. Both methods used KL-divergence and Cross-Entropy loss as the the term of loss function. The former term is classification loss and the latter is regularization, which aims to force the network to peak at only one category rather than being flat because the one-hot distribution has the smallest possible entropy value. 
 The difference between above two method lies in the manner of introducing a prior probability. 
