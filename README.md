@@ -9,6 +9,8 @@ First of all, we introduced two classic models, Sainbayar et al.[1] and Forward[
 
 <img src="http://chart.googleapis.com/chart?cht=tx&chl=\overline{\boldsymbol{x}}^{i}=\operatorname{argmax}_{\boldsymbol{x} \in X^{\prime}} \hat{p}\left(\tilde{\boldsymbol{y}}=\boldsymbol{e}^{i} \mid \boldsymbol{x}\right)" style="border:none;">
 
+https://latex.codecogs.com/gif.latex?\\sum_{i=0}^n
+
 At this time, the probability distribution obtained by this perfect example was used as an unbiased estimate of its noise matrix class.
 
 <img src="http://chart.googleapis.com/chart?cht=tx&chl= \hat{T}_{i j}=\hat{p}\left(\tilde{\boldsymbol{y}}=\boldsymbol{e}^{j} \mid \overline{\boldsymbol{x}}^{i}\right)" style="border:none;">
