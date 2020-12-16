@@ -13,15 +13,21 @@ At this time, the probability distribution obtained by this perfect example was 
 
 $$\hat{T}_{i j}=\hat{p}\left(\tilde{\boldsymbol{y}}=\boldsymbol{e}^{j} \mid \overline{\boldsymbol{x}}^{i}\right)$$
 
-接下来，我们介绍最近常用于解决Noise Label Learning的方法。改写损失函数法包括：Trunc Loss[3], Yi et al.[4], PENCIL[5], DAC[6], SL[7]. Trunc Loss was proposed based on the principle: Cross Entropy Loss收敛速度快，拟合能力强，但noise-robust差；MAE收敛速度慢，拟合label能力差，但noise-robust好。于是作者提出两者的结合：
+Next, we introduce the methods used to solve Noise Label Learning recently. Rewritten loss function methods include: Trunc Loss[3], Yi et al.[4], PENCIL[5], DAC[6], SL[7]. 
 
-$$\mathcal{L}_{q}\left(f(\boldsymbol{x}), \boldsymbol{e}_{j}\right)=\frac{\left(1-f_{j}(\boldsymbol{x})^{q}\right)}{q}$$, q->0是CCE，q=1是MAE。
+Trunc Loss was proposed based on the principle: Cross-Entropy Loss has quick convergence speed and stronger fitting ability, but the noise-robust is poor. MAE converges slowly and the fitting ability is poor, but the noise-robust is good. So the author proposes a reconciliation as follow:
 
-作者提出，样本损失在一定区间内则使用上式优化，超过此区间则设损失为常数，不优化，总的目标函数如下表达：
+$$\mathcal{L}_{q}\left(f(\boldsymbol{x}), \boldsymbol{e}_{j}\right)=\frac{\left(1-f_{j}(\boldsymbol{x})^{q}\right)}{q}$$, q->0 is CCE，q=1 is MAE。
 
-$$\underset{\boldsymbol{\theta}, \boldsymbol{w} \in[0,1]^{n}}{\operatorname{argmin}} \sum_{i=1}^{n} w_{i} \mathcal{L}_{q}\left(f\left(\boldsymbol{x}_{i} ; \boldsymbol{\theta}\right), y_{i}\right)-\mathcal{L}_{q}(k) \sum_{i=1}^{n} w_{i}$$
+The author proposed that if the sample loss is within a certain interval, the above formula was used to update parameters, and if the loss exceeded this interval, the loss was set as a constant without optimization. The total objective function was expressed as follows:
 
-PENCIL[5] 是 Yi et al.[4]的改进。两个方法都使用了KL-divergence loss 和 Entropy loss。前者为分类损失，后者为正则化项，目的在于可以 force the network to peak at only one category rather than being flat because the one-hot distribution has the smallest possible entropy value。不同之处在于一个先验概率分布的引入。Yi et al的方法中，引入一个固定的先验概率分布，which is a distribution of classes among all training data. 目地有两个：1.If the prior distribution of classes is known, then the updated labels should follow the same； 2. prevent the assignment of all labels to a single class；。但在PENCIL中，这个先验概率视为参数，可以被更新。这个先验概率于预测值的KL-divergence作为这两种方法损失中但正则化项。
+$$\underset{\boldsymbol{\theta}, \boldsymbol{w} \in[0,1]^{n}}{\operatorname{argmin}} \sum_{i=1}^{n} w_{i} \mathcal{L}_{q}\left(f\left(\boldsymbol{x}_{i}; \boldsymbol{\theta}\right), y_{i}\right)-\mathcal{L}_{q}(k) \sum_{i=1}^{n} w_{i}$$
+
+PENCIL[5] is a improvement of Yi et al.[4]. Both methods used KL-divergence and Cross-Entropy loss as the the term of loss function. The former term is classification loss and the latter is regularization, which aims to force the network to peak at only one category rather than being flat because the one-hot distribution has the smallest possible entropy value. 
+The difference between above two method lies in the manner of introducing a prior probability. 
+This prior probability represents a rough probability estimation of label distribution. 
+Yi et al introduced a fixed prior probability.
+The function includes：1.If the prior distribution of classes is known, then the updated labels should follow the same； 2. prevent the assignment of all labels to a single class. By comparison，this prior probability was regarded as learnable parameters in PENCIL.  Both these two methods ultilized  KL-divergence between this prior probability and the predicted value as the regularization term in the loss.
 
 DAC[6] 引入 abstention rates概念，根据abstention rates分配样本权重。样本输出维度为类别数目+1，最后一维度作为abstention rates。为避免模型倾向于遗弃样本，作者提出正则化项，当遗弃样本式此项会增加总体损失。因此，总的损失函数为：
 
