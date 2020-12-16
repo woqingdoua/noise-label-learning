@@ -17,7 +17,7 @@ Next, we introduce the methods used to solve Noise Label Learning recently. Rewr
 
 Trunc Loss was proposed based on the principle: Cross-Entropy Loss has quick convergence speed and stronger fitting ability, but the noise-robust is poor. MAE converges slowly and the fitting ability is poor, but the noise-robust is good. So the author proposes a reconciliation as follow:
 
-$$\mathcal{L}_{q}\left(f(\boldsymbol{x}), \boldsymbol{e}_{j}\right)=\frac{\left(1-f_{j}(\boldsymbol{x})^{q}\right)}{q}$$, q->0 is CCE，q=1 is MAE。
+$$\mathcal{L}_{q}\left(f(\boldsymbol{x}), \boldsymbol{e}_{j}\right)=\frac{(1-f_{j}(\boldsymbol{x})^{q})}{q}$$, q->0 is CCE，q=1 is MAE.
 
 The author proposed that if the sample loss is within a certain interval, the above formula was used to update parameters, and if the loss exceeded this interval, the loss was set as a constant without optimization. The total objective function was expressed as follows:
 
